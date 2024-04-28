@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        #drop-down {
+            text-align: center;
+            border: 1px solid green;
+            width: 50%;
+            margin: auto;
+        }
+
+        #drop-down>select {
+            height: 30px;
+
+        }
+        table{
+            border: 1px solid black;
+            width: 80%;
+            margin: auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Employee Management System </h1>
+    </div>
+    <div id="drop-down">
+        <label for="">Filter By Department</label>
+        <select name="" id="department">
+            <option value="">Select department </option>
+            <option value="hr" id="hr1">hr</option>
+            <option value="finance">finance</option>
+            <option value="marketing">marketing</option>
+            <option value="engineering">engineering</option>
+            <option value="operations">operations</option>
+        </select>
+
+        <label for="">Filter By Gender</label>
+        <select name="" id="gender">
+            <option value="">Select Gender</option>
+            <option value="1">male</option>
+            <option value="2">female</option>
+        </select>
+
+
+        <label for="">Sort by Salary</label>
+        <select name="" id="salary">
+            <option value="">Sort By </option>
+            <option value="1">Low to High</option>
+            <option value="2">High to Low</option>
+        </select>
+
+
+    </div>
+
+    <div id="table">
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    let mytable = document.getElementById('table')
+    fetch(' https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees')
+        .then(res => res.json())
+        .then(data => {
+            /* console.log(data) */
+
+
+            let hr = document.getElementById('department')
+            hr.addEventListener('change', function () {
+                let selection = hr.value
+                let newdata = data.data
+                /*  if(data.data[0].department="engineering"){
+                     console.log(data.data[0])
+                 } */
+                //console.log(newdata)
+                newdata.forEach(ele => {
+                    if (ele.department == "hr") {
+                        // console.log(ele)
+                        
+                        let table = document.createElement('table')
+                        mytable.append(table)
+
+                        let tablehead = document.createElement('thead')
+                        table.append(tablehead)
+
+                        let tr = document.createElement('tr')
+                        tablehead.append(tr)
+                        inner.html = null
+
+                    }
+                })
+
+
+
+
+            })
+
+        })
+</script>
